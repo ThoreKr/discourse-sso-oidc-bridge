@@ -33,4 +33,4 @@ USER $UNAME
 EXPOSE 8080
 
 # Run application with Gunicorn
-CMD gunicorn --workers=2 --bind ${SSO_SERVER_IP:-0.0.0.0}:${SSO_SERVER_PORT:-8080} discourse_sso_oidc_bridge:app
+CMD gunicorn --workers=2 --bind ${BIND_IP:-0.0.0.0}:${BIND_PORT:-8080} discourse_sso_oidc_bridge:app
