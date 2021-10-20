@@ -218,6 +218,7 @@ def create_app(config=None):
 
         sso_attributes = {}
         userinfo = session["userinfo"]
+        app.logger.debug("Received Userdata from IdP: %s", userinfo)
 
         # Check if the provided userinfo should be used to set information to be
         # passed to discourse. Do it by checking if the userinfo field is...
