@@ -33,5 +33,10 @@ def process_group_mappings(
         else:
             grps.append(mapping_rule["name"])
 
+        # Make sure the mod and admin privileges are pinned to false to trigger permission reset on group change.
+        for priv in ["admin", "moderator"]:
+            if priv not in sso_attributes:
+                sso_attributes[priv] = "false"
+
     sso_attributes["groups"] = ",".join(grps)
     return sso_attributes

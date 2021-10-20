@@ -299,7 +299,7 @@ def test_configured_userinfo_group_map(discourse_nonce, auth_data_custom_userinf
         assert urlparse(res.location).path == "/session/sso_login"
         assert (
             urlparse(res.location).query
-            == "sso=bm9uY2U9Y2I2ODI1MWVlZmI1MjExZTU4YzAwZmYxMzk1ZjBjMGImZXh0ZXJuYWxfaWQ9am9obl9kb2UmZW1haWw9am9obl9kb2UlNDBleGFtcGxlLmNvbSZncm91cHM9ZXh0ZXJuYWwmbmFtZT1Kb2huJTIwRG9lJnVzZXJuYW1lPWpvaG5fZG9lJm1vZGVyYXRvcj10cnVl&sig=67c6f2e41f656a204d75c41ddf43770f1c6f6664670673d232ce7a136406a9a0"
+            == "sso=bm9uY2U9Y2I2ODI1MWVlZmI1MjExZTU4YzAwZmYxMzk1ZjBjMGImZXh0ZXJuYWxfaWQ9am9obl9kb2UmZW1haWw9am9obl9kb2UlNDBleGFtcGxlLmNvbSZncm91cHM9ZXh0ZXJuYWwmbmFtZT1Kb2huJTIwRG9lJnVzZXJuYW1lPWpvaG5fZG9lJm1vZGVyYXRvcj10cnVlJmFkbWluPWZhbHNl&sig=6a13834d1cad948c2c6acbd215013c08dcdc8ec69f1c7176b804d10d577b265e"
         )
 
 
