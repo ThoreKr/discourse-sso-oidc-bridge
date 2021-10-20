@@ -38,9 +38,10 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip install --upgrade pip
-          pip install .
+          pip install --upgrade pip poetry
+          poetry install
 
       - name: Run tests
         run: |
-          pytest --verbose --color=yes
+          poetry run coverage run -m pytest
+          poetry run coverage report

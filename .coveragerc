@@ -1,0 +1,13 @@
+[run]
+source = ./
+branch = True
+
+[report]
+omit =
+    tests/*
+
+show_missing = True
+skip_covered = True
+exclude_lines =
+    if settings.DEBUG
+    pragma: no cover
