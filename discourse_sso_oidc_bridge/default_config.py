@@ -2,8 +2,8 @@
 Default configuration for FLASK app
 """
 
-import os
 import json
+import os
 
 
 class DefaultConfig(object):
@@ -82,6 +82,24 @@ class DefaultConfig(object):
             """,
         )
     )
+
+    # Group mappings from the OIDC groups attribute to custom discourse group names and
+    # privilege implications
+    # Example JSON formatted string that could be passed:
+    # """
+    # {
+    #     "<group_name>": {
+    #         "name": "<group name in discourse>",
+    #         "isMod": false,
+    #         "isAdmin": false
+    #     }
+    # }
+    # """
+    # Where all attributes are mutually exclusive
+    # So isAdmin will set the admin flag but won't process any groups.
+    # The same applies to isMod. Otherwise the specified name will be sent to discourse
+    # Groups which are provided by the IdP but not mapped here will be ignored.
+    USERINFO_GROUP_MAP = json.loads(os.environ.get("USERINFO_GROUP_MAP", "{}"))
 
     # If you want some default values to be sent back to discourse, you can add
     # such defaults here. Note that you probably only want to set those that

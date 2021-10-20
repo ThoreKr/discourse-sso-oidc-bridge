@@ -5,34 +5,36 @@ environment variable CONFIG_LOCATION.
 For the relevant configuration options, inspect default_config.py.
 """
 
-from flask import (
-    abort,
-    Flask,
-    redirect,
-    render_template,
-    request,
-    url_for,
-    session,
-    jsonify,
-)
-from flask_pyoidc import OIDCAuthentication
-from flask_pyoidc.provider_configuration import (
-    ProviderConfiguration,
-    ProviderMetadata,
-    ClientMetadata,
-)
-
-import os
-import re
 import base64
 import hashlib
 import hmac
-import requests
 import json
+import os
+import re
 from urllib.parse import quote
+
+import requests
+from flask import (
+    Flask,
+    abort,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
+)
+from flask_pyoidc import OIDCAuthentication
+from flask_pyoidc.provider_configuration import (
+    ClientMetadata,
+    ProviderConfiguration,
+    ProviderMetadata,
+)
 from healthcheck import HealthCheck
+
 from .constants import ALL_ATTRIBUTES, BOOL_ATTRIBUTES, REQUIRED_ATTRIBUTES
 from .default_config import DefaultConfig
+from .group_processor import process_group_mappings
 
 # Disable SSL certificate verification warning
 requests.packages.urllib3.disable_warnings()
@@ -249,6 +251,13 @@ def create_app(config=None):
         ) in default_sso_attributes.items():
             if default_attribute_key not in sso_attributes:
                 sso_attributes[default_attribute_key] = default_attribute_value
+
+        # Perform custom group postprocessing
+        group_mapping_config = app.config.get("USERINFO_GROUP_MAP")
+        if group_mapping_config != {}:
+            sso_attributes = process_group_mappings(
+                group_mapping_config, sso_attributes, userinfo["groups"]
+            )
 
         # Check if we got the required attributes
         for required_attribute in REQUIRED_ATTRIBUTES:

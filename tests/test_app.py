@@ -2,12 +2,13 @@
 Tests to verify most of the functionality
 """
 
-import time
 import json
-from contextlib import contextmanager
-import pytest
+import time
 from base64 import b64decode
-from urllib.parse import urlparse, unquote
+from contextlib import contextmanager
+from urllib.parse import unquote, urlparse
+
+import pytest
 from discourse_sso_oidc_bridge import create_app
 
 
@@ -266,6 +267,39 @@ def test_configured_userinfo_sso_map(discourse_nonce, auth_data_custom_userinfo)
         assert (
             urlparse(res.location).query
             == "sso=bm9uY2U9Y2I2ODI1MWVlZmI1MjExZTU4YzAwZmYxMzk1ZjBjMGImZXh0ZXJuYWxfaWQ9am9obl9kb2UmZW1haWw9am9obl9kb2UlNDBleGFtcGxlLmNvbSZuYW1lPUpvaG4lMjBEb2UmdXNlcm5hbWU9am9obl9kb2U%3D&sig=75c84a0093669181d88602eafdb2ea2f06b29e1f1dec6887c262c070a9982617"
+        )
+
+
+def test_configured_userinfo_group_map(discourse_nonce, auth_data_custom_userinfo):
+    """Test the that userinfo to sso mapping can be configured"""
+    with client_maker(
+        {
+            "USERINFO_SSO_MAP": {
+                "a_very_unique_sub": "external_id",
+                "preferred_username": "username",
+            },
+            "USERINFO_GROUP_MAP": {
+                "moderators": {"isMod": True},
+                "special_users": {"name": "external"},
+            },
+        }
+    ) as client:
+        auth_data_custom_userinfo["userinfo"]["groups"] = [
+            "moderators",
+            "special_users",
+            "ignored_group",
+        ]
+
+        with client.session_transaction() as session:
+            session.update(discourse_nonce)
+            session.update(auth_data_custom_userinfo)
+
+        res = client.get("/sso/auth")
+        assert res.status_code == 302
+        assert urlparse(res.location).path == "/session/sso_login"
+        assert (
+            urlparse(res.location).query
+            == "sso=bm9uY2U9Y2I2ODI1MWVlZmI1MjExZTU4YzAwZmYxMzk1ZjBjMGImZXh0ZXJuYWxfaWQ9am9obl9kb2UmZW1haWw9am9obl9kb2UlNDBleGFtcGxlLmNvbSZncm91cHM9ZXh0ZXJuYWwmbmFtZT1Kb2huJTIwRG9lJnVzZXJuYW1lPWpvaG5fZG9lJm1vZGVyYXRvcj10cnVl&sig=67c6f2e41f656a204d75c41ddf43770f1c6f6664670673d232ce7a136406a9a0"
         )
 
 
