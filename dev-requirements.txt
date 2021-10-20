@@ -1,4 +1,0 @@
-pip-tools
-pytest
-setuptools
-urllib3
