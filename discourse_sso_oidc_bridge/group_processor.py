@@ -26,9 +26,9 @@ def process_group_mappings(
         if mapping_rule is None:
             continue
 
-        elif mapping_rule.get("isAdmin", False):
+        if mapping_rule.get("isAdmin", False):
             sso_attributes["admin"] = "true"
-        if mapping_rule.get("isMod", False):
+        elif mapping_rule.get("isMod", False):
             sso_attributes["moderator"] = "true"
         else:
             grps.append(mapping_rule["name"])
