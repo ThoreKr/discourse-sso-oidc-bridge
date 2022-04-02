@@ -37,9 +37,9 @@ class DefaultConfig(object):
         os.environ.get("OIDC_EXTRA_AUTH_REQUEST_PARAMS", "{}")
     )
 
-    # Timeout sessions after 3 minutes to ensure keycloak data is recent
+    # Timeout sessions after 1 minute to ensure keycloak data is recent
     OIDC_SESSION_PERMANENT = True
-    PERMANENT_SESSION_LIFETIME = timedelta(minutes=3)
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=1)
 
     # Advanced OpenID Connect config: probably best to ignore...
     # --------------------------------------------------------------------------

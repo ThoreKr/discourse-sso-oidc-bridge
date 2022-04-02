@@ -168,7 +168,7 @@ dotenv = ["python-dotenv"]
 
 [[package]]
 name = "flask-pyoidc"
-version = "3.10.0"
+version = "3.9.0"
 description = "Flask extension for OpenID Connect authentication."
 category = "main"
 optional = false
@@ -574,7 +574,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "be274e326a11d68df2f064805376b94875d505a1fff13fe816150c1d0448cd57"
+content-hash = "e85e545421e200ba0f6895877a73b5aa34beab0ff8937be810dcc5acb8072ba2"
 
 [metadata.files]
 atomicwrites = [
@@ -755,7 +755,7 @@ flask = [
     {file = "Flask-2.1.1.tar.gz", hash = "sha256:a8c9bd3e558ec99646d177a9739c41df1ded0629480b4c8d2975412f3c9519c8"},
 ]
 flask-pyoidc = [
-    {file = "Flask_pyoidc-3.10.0-py3-none-any.whl", hash = "sha256:858196f9fb6e5fa2d96c5aca84a1349a85bdffb21378d6acb860fad97d6370f2"},
+    {file = "Flask_pyoidc-3.9.0-py3-none-any.whl", hash = "sha256:18e6ab044e43a416a96673bbf704763b313d29e903dcf8fe475e2d3562b5d8be"},
 ]
 funcsigs = [
     {file = "funcsigs-1.0.2-py2.py3-none-any.whl", hash = "sha256:330cc27ccbf7f1e992e69fef78261dc7c6569012cf397db8d3de0234e6c937ca"},
