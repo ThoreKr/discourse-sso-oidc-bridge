@@ -1,5 +1,7 @@
 FROM python:3.10-slim AS builder
 
+RUN apt-get update && apt-get install -y git
+
 RUN mkdir -p /app
 
 WORKDIR /app
@@ -19,6 +21,7 @@ ARG GID=993
 RUN groupadd -g $GID -o $UNAME
 RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
 
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /wheels /wheels
 
