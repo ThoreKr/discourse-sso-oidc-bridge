@@ -36,6 +36,8 @@ class DefaultConfig(object):
         os.environ.get("OIDC_EXTRA_AUTH_REQUEST_PARAMS", "{}")
     )
 
+    OIDC_SESSION_PERMANENT = False
+
     # Advanced OpenID Connect config: probably best to ignore...
     # --------------------------------------------------------------------------
     # For _static_ provider configuration (not recommended)
