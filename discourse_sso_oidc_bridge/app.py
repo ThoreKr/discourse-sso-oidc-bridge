@@ -31,6 +31,7 @@ from flask_pyoidc.provider_configuration import (
     ProviderMetadata,
 )
 from healthcheck import HealthCheck
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from .constants import ALL_ATTRIBUTES, BOOL_ATTRIBUTES, REQUIRED_ATTRIBUTES
 from .default_config import DefaultConfig
@@ -328,3 +329,4 @@ def create_app(config=None):
 
 
 app = create_app()
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
