@@ -2,6 +2,7 @@
 Default configuration for FLASK app
 """
 
+from datetime import timedelta
 import json
 import os
 
@@ -36,7 +37,9 @@ class DefaultConfig(object):
         os.environ.get("OIDC_EXTRA_AUTH_REQUEST_PARAMS", "{}")
     )
 
-    OIDC_SESSION_PERMANENT = False
+    # Timeout sessions after 3 minutes to ensure keycloak data is recent
+    OIDC_SESSION_PERMANENT = True
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=3)
 
     # Advanced OpenID Connect config: probably best to ignore...
     # --------------------------------------------------------------------------
