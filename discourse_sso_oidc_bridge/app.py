@@ -14,22 +14,12 @@ import re
 from urllib.parse import quote
 
 import requests
-from flask import (
-    Flask,
-    abort,
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    session,
-    url_for,
-)
+from flask import (Flask, abort, jsonify, redirect, render_template, request,
+                   session, url_for)
 from flask_pyoidc import OIDCAuthentication
-from flask_pyoidc.provider_configuration import (
-    ClientMetadata,
-    ProviderConfiguration,
-    ProviderMetadata,
-)
+from flask_pyoidc.provider_configuration import (ClientMetadata,
+                                                 ProviderConfiguration,
+                                                 ProviderMetadata)
 from healthcheck import HealthCheck
 
 from .constants import ALL_ATTRIBUTES, BOOL_ATTRIBUTES, REQUIRED_ATTRIBUTES
@@ -111,12 +101,14 @@ def create_app(config=None):
             provider_metadata=provider_metadata,
             client_metadata=client_metadata,
             auth_request_params=app.config["OIDC_AUTH_REQUEST_PARAMS"],
+            session_refresh_interval_seconds=30,
         )
     else:
         provider = ProviderConfiguration(
             issuer=app.config["OIDC_ISSUER"],
             client_metadata=client_metadata,
             auth_request_params=app.config["OIDC_AUTH_REQUEST_PARAMS"],
+            session_refresh_interval_seconds=30,
         )
 
     auth = OIDCAuthentication(
