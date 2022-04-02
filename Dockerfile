@@ -1,4 +1,4 @@
-FROM python:3.9-slim AS builder
+FROM python:3.10-slim AS builder
 
 RUN mkdir -p /app
 
@@ -11,7 +11,7 @@ RUN pip wheel . --wheel-dir /wheels --find-links /wheels
 
 
 #
-FROM python:3.9-slim
+FROM python:3.10-slim
 
 ARG UNAME=sso
 ARG UID=993
