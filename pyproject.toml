@@ -13,11 +13,11 @@ Flask-pyoidc = "^3.14.1"
 gunicorn = "^20.1.0"
 
 [tool.poetry.dev-dependencies]
-pip-tools = "^6.4.0"
+pip-tools = "^6.14.0"
 pytest = "^6.2.5"
-urllib3 = "^1.26.7"
-coverage = "^6.0.2"
-black = "^22.3.0"
+urllib3 = "^1.26.16"
+coverage = "^6.5.0"
+black = "^22.12.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -256,7 +256,7 @@ def create_app(config=None):
 
         # Perform custom group postprocessing
         group_mapping_config = app.config.get("USERINFO_GROUP_MAP")
-        if group_mapping_config != {}:
+        if group_mapping_config != {} and "groups" in userinfo:
             sso_attributes = process_group_mappings(
                 group_mapping_config, sso_attributes, userinfo["groups"]
             )
