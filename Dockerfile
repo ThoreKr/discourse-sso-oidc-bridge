@@ -1,4 +1,4 @@
-FROM python:3.10-slim AS builder
+FROM python:3.11-slim AS builder
 
 RUN apt-get update && apt-get install -y git
 
@@ -13,7 +13,7 @@ RUN pip wheel . --wheel-dir /wheels --find-links /wheels
 
 
 #
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 ARG UNAME=sso
 ARG UID=993
