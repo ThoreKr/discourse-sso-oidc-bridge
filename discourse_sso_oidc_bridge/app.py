@@ -192,9 +192,9 @@ def create_app(config=None):
 
         # Decode the payload and store in session
         decoded_msg = base64.b64decode(payload).decode("utf-8")
-        session[
-            "discourse_nonce"
-        ] = decoded_msg  # This can't just be 'nonce' as Flask-pyoidc will steamroll it
+        session["discourse_nonce"] = (
+            decoded_msg  # This can't just be 'nonce' as Flask-pyoidc will steamroll it
+        )
 
         # Redirect to authorization endpoint
         return redirect(url_for("sso_auth"))
