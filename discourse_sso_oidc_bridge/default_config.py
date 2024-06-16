@@ -39,7 +39,7 @@ class DefaultConfig(object):
 
     # Timeout sessions after 1 minute to ensure keycloak data is recent
     OIDC_SESSION_PERMANENT = True
-    PERMANENT_SESSION_LIFETIME = timedelta(minutes=1)
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=10)
 
     # Advanced OpenID Connect config: probably best to ignore...
     # --------------------------------------------------------------------------
