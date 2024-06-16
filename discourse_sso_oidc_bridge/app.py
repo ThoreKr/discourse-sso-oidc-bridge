@@ -30,7 +30,6 @@ from flask_pyoidc.provider_configuration import (
     ProviderConfiguration,
     ProviderMetadata,
 )
-from healthcheck import HealthCheck
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from .constants import ALL_ATTRIBUTES, BOOL_ATTRIBUTES, REQUIRED_ATTRIBUTES
@@ -126,10 +125,6 @@ def create_app(config=None):
         },
         app=app,
     )
-
-    # The /health endpoint returns a JSON string like...
-    # {"hostname": "a3731af16461", "status": "success", "timestamp": 1551186453.8854501, "results": []}
-    HealthCheck(app, "/health")
 
     # If an OAuth error response is received, either in the authentication or
     # token response, it will be passed to the "error view".

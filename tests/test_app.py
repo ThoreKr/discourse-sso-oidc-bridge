@@ -103,12 +103,12 @@ def discourse_nonce():
     }
 
 
-def test_health_check_endpoint(client):
-    """Test that we can access the health check endpoint /health"""
-    with client.get("/health") as res:
-        assert res.status_code == 200
-        assert res.content_type == "application/json"
-        assert json.loads(res.get_data()).get("status") == "success"
+#def test_health_check_endpoint(client):
+#    """Test that we can access the health check endpoint /health"""
+#    with client.get("/health") as res:
+#        assert res.status_code == 200
+#        assert res.content_type == "application/json"
+#        assert json.loads(res.get_data()).get("status") == "success"
 
 
 def test_sso_login_with_ok_sso_and_sig(client):
