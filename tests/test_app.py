@@ -2,7 +2,6 @@
 Tests to verify most of the functionality
 """
 
-import json
 import time
 from base64 import b64decode
 from contextlib import contextmanager
@@ -103,7 +102,7 @@ def discourse_nonce():
     }
 
 
-#def test_health_check_endpoint(client):
+# def test_health_check_endpoint(client):
 #    """Test that we can access the health check endpoint /health"""
 #    with client.get("/health") as res:
 #        assert res.status_code == 200
